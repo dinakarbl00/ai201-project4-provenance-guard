@@ -60,7 +60,14 @@ def add_log_entry(entry):
 def home():
     return jsonify({
         "message": "Provenance Guard API is running",
-        "endpoints": ["/submit", "/appeal", "/log"]
+        "endpoints": [
+            "/submit",
+            "/appeal",
+            "/log",
+            "/verify-human",
+            "/analytics",
+            "/submit-metadata"
+        ]
     })
 
 def extract_json_from_text(text):
@@ -294,6 +301,43 @@ def find_classification_entry(entries, content_id):
 
     return None
 
+def get_verified_human_label():
+    return "Verified human-created work: the creator completed an additional verification step for this submission."
+
+def score_metadata(editing_minutes, revision_count, used_ai_tool, description):
+    score = 0.50
+    reasons = []
+
+    if used_ai_tool:
+        score += 0.25
+        reasons.append("Creator disclosed AI tool use.")
+
+    if editing_minutes < 5:
+        score += 0.20
+        reasons.append("Very low editing time may suggest generated or lightly edited content.")
+    elif editing_minutes >= 30:
+        score -= 0.15
+        reasons.append("Longer editing time supports human revision effort.")
+
+    if revision_count <= 1:
+        score += 0.15
+        reasons.append("Very few revisions may suggest limited human drafting.")
+    elif revision_count >= 5:
+        score -= 0.15
+        reasons.append("Multiple revisions support human writing effort.")
+
+    if len(description.split()) < 5:
+        score += 0.10
+        reasons.append("Very short description gives limited human process evidence.")
+
+    score = max(0.0, min(1.0, score))
+
+    return {
+        "metadata_score": round(score, 2),
+        "metadata_reasons": reasons
+    }
+
+
 @app.route("/submit", methods=["POST"])
 @limiter.limit("10 per minute;100 per day")
 def submit():
@@ -409,6 +453,204 @@ def appeal():
             "original_confidence": original_entry.get("confidence")
         }
     })
+
+@app.route("/verify-human", methods=["POST"])
+def verify_human():
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request body must be JSON"}), 400
+
+    content_id = data.get("content_id", "").strip()
+    creator_id = data.get("creator_id", "").strip()
+    verification_statement = data.get("verification_statement", "").strip()
+
+    if content_id == "":
+        return jsonify({"error": "Missing required field: content_id"}), 400
+
+    if creator_id == "":
+        return jsonify({"error": "Missing required field: creator_id"}), 400
+
+    if verification_statement == "":
+        return jsonify({"error": "Missing required field: verification_statement"}), 400
+
+    entries = load_log()
+    original_entry = find_classification_entry(entries, content_id)
+
+    if original_entry is None:
+        return jsonify({"error": "No classified content found for that content_id"}), 404
+
+    if original_entry.get("creator_id") != creator_id:
+        return jsonify({"error": "creator_id does not match the original submission"}), 403
+
+    verified_label = get_verified_human_label()
+
+    original_entry["status"] = "verified_human"
+    original_entry["verified_human"] = True
+    original_entry["verified_label"] = verified_label
+
+    certificate_entry = {
+        "event_type": "provenance_certificate",
+        "content_id": content_id,
+        "creator_id": creator_id,
+        "timestamp": get_timestamp(),
+        "status": "verified_human",
+        "verification_statement": verification_statement,
+        "verified_label": verified_label
+    }
+
+    entries.append(certificate_entry)
+    save_log(entries)
+
+    return jsonify({
+        "content_id": content_id,
+        "creator_id": creator_id,
+        "status": "verified_human",
+        "verified_human": True,
+        "label": verified_label,
+        "message": "Verification received. A provenance certificate has been added to this content."
+    })
+
+@app.route("/analytics", methods=["GET"])
+def analytics():
+    entries = load_log()
+
+    classification_entries = [
+        entry for entry in entries
+        if entry.get("event_type") == "classification"
+    ]
+
+    appeal_entries = [
+        entry for entry in entries
+        if entry.get("event_type") == "appeal"
+    ]
+
+    certificate_entries = [
+        entry for entry in entries
+        if entry.get("event_type") == "provenance_certificate"
+    ]
+
+    detection_counts = {
+        "likely_ai": 0,
+        "uncertain": 0,
+        "likely_human": 0
+    }
+
+    total_confidence = 0
+
+    for entry in classification_entries:
+        attribution = entry.get("attribution", "uncertain")
+
+        if attribution in detection_counts:
+            detection_counts[attribution] += 1
+
+        total_confidence += entry.get("confidence", 0)
+
+    total_classifications = len(classification_entries)
+
+    if total_classifications > 0:
+        average_confidence = round(total_confidence / total_classifications, 2)
+        appeal_rate = round(len(appeal_entries) / total_classifications, 2)
+    else:
+        average_confidence = 0
+        appeal_rate = 0
+
+    return jsonify({
+        "total_classifications": total_classifications,
+        "detection_counts": detection_counts,
+        "appeal_count": len(appeal_entries),
+        "appeal_rate": appeal_rate,
+        "average_confidence": average_confidence,
+        "verified_certificate_count": len(certificate_entries)
+    })
+
+@app.route("/submit-metadata", methods=["POST"])
+def submit_metadata():
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request body must be JSON"}), 400
+
+    creator_id = data.get("creator_id", "").strip()
+    title = data.get("title", "").strip()
+    description = data.get("description", "").strip()
+    editing_minutes = data.get("editing_minutes")
+    revision_count = data.get("revision_count")
+    used_ai_tool = data.get("used_ai_tool")
+
+    if creator_id == "":
+        return jsonify({"error": "Missing required field: creator_id"}), 400
+
+    if title == "":
+        return jsonify({"error": "Missing required field: title"}), 400
+
+    if description == "":
+        return jsonify({"error": "Missing required field: description"}), 400
+
+    if editing_minutes is None:
+        return jsonify({"error": "Missing required field: editing_minutes"}), 400
+
+    if revision_count is None:
+        return jsonify({"error": "Missing required field: revision_count"}), 400
+
+    if used_ai_tool is None:
+        return jsonify({"error": "Missing required field: used_ai_tool"}), 400
+
+    try:
+        editing_minutes = int(editing_minutes)
+        revision_count = int(revision_count)
+        used_ai_tool = bool(used_ai_tool)
+    except ValueError:
+        return jsonify({"error": "editing_minutes and revision_count must be numbers"}), 400
+
+    content_id = str(uuid.uuid4())
+
+    metadata_result = score_metadata(
+        editing_minutes,
+        revision_count,
+        used_ai_tool,
+        description
+    )
+
+    confidence = metadata_result["metadata_score"]
+    attribution = get_attribution_from_score(confidence)
+    label = get_label(attribution)
+
+    response = {
+        "content_id": content_id,
+        "creator_id": creator_id,
+        "content_type": "metadata",
+        "title": title,
+        "attribution": attribution,
+        "confidence": confidence,
+        "label": label,
+        "signals": {
+            "metadata_score": metadata_result["metadata_score"],
+            "metadata_reasons": metadata_result["metadata_reasons"],
+            "editing_minutes": editing_minutes,
+            "revision_count": revision_count,
+            "used_ai_tool": used_ai_tool
+        },
+        "status": "classified"
+    }
+
+    log_entry = {
+        "event_type": "metadata_classification",
+        "content_id": content_id,
+        "creator_id": creator_id,
+        "timestamp": get_timestamp(),
+        "content_type": "metadata",
+        "title": title,
+        "attribution": attribution,
+        "confidence": confidence,
+        "signals": response["signals"],
+        "label": label,
+        "status": "classified"
+    }
+
+    add_log_entry(log_entry)
+
+    return jsonify(response)
 
 @app.route("/log", methods=["GET"])
 def get_log():

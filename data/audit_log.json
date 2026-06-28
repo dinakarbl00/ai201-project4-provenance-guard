@@ -123,7 +123,9 @@
       }
     },
     "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
-    "status": "classified"
+    "status": "verified_human",
+    "verified_human": true,
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
   },
   {
     "event_type": "appeal",
@@ -388,6 +390,76 @@
       }
     },
     "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "provenance_certificate",
+    "content_id": "03c92d10-ad64-4083-8ab6-4fa57172580e",
+    "creator_id": "test-human-ensemble",
+    "timestamp": "2026-06-28T03:40:26.031108+00:00",
+    "status": "verified_human",
+    "verification_statement": "I wrote this myself from a personal restaurant experience and can explain my drafting process.",
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
+  },
+  {
+    "event_type": "metadata_classification",
+    "content_id": "ecc878c4-50cb-4ca0-b415-55c341b157a0",
+    "creator_id": "metadata-user-1",
+    "timestamp": "2026-06-28T03:41:24.901171+00:00",
+    "content_type": "metadata",
+    "title": "Moving to a New City",
+    "attribution": "likely_human",
+    "confidence": 0.2,
+    "signals": {
+      "metadata_score": 0.2,
+      "metadata_reasons": [
+        "Longer editing time supports human revision effort.",
+        "Multiple revisions support human writing effort."
+      ],
+      "editing_minutes": 45,
+      "revision_count": 6,
+      "used_ai_tool": false
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "a98fead7-3e47-4ff3-a15e-087ecc25ff05",
+    "creator_id": "test-strong-ai",
+    "timestamp": "2026-06-28T03:43:29.545166+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.78,
+    "signals": {
+      "llm_score": 0.8,
+      "llm_reasoning": "The text exhibits repetitive and formulaic sentence structures, which is a common trait of AI-generated content.",
+      "stylometric_score": 0.66,
+      "stylometric_details": {
+        "sentence_count": 4,
+        "word_count": 46,
+        "sentence_length_variance": 4.25,
+        "type_token_ratio": 0.54,
+        "punctuation_density": 0.15
+      },
+      "repetition_score": 1.0,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "in conclusion",
+          "overall",
+          "plays a crucial role",
+          "various sectors",
+          "responsible deployment"
+        ],
+        "repeated_words": [
+          "intelligence",
+          "artificial",
+          "crucial"
+        ]
+      }
+    },
+    "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
     "status": "classified"
   }
 ]
