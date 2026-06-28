@@ -461,5 +461,667 @@
     },
     "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
     "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "ff8053ab-3161-46e6-8518-608505f0b59f",
+    "creator_id": "video-strong-ai",
+    "timestamp": "2026-06-28T14:54:27.006130+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.78,
+    "signals": {
+      "llm_score": 0.8,
+      "llm_reasoning": "The text exhibits repetitive and formulaic sentence structures, which is a common trait of AI-generated content.",
+      "stylometric_score": 0.66,
+      "stylometric_details": {
+        "sentence_count": 4,
+        "word_count": 46,
+        "sentence_length_variance": 4.25,
+        "type_token_ratio": 0.54,
+        "punctuation_density": 0.15
+      },
+      "repetition_score": 1.0,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "in conclusion",
+          "overall",
+          "plays a crucial role",
+          "various sectors",
+          "responsible deployment"
+        ],
+        "repeated_words": [
+          "crucial",
+          "artificial",
+          "intelligence"
+        ]
+      }
+    },
+    "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "cff61c74-e40a-4310-9583-abe2e91386ba",
+    "creator_id": "video-human",
+    "timestamp": "2026-06-28T14:54:27.369770+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.21,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text includes casual language, personal opinions, and a conversational tone, which are characteristic of human writing.",
+      "stylometric_score": 0.29,
+      "stylometric_details": {
+        "sentence_count": 5,
+        "word_count": 55,
+        "sentence_length_variance": 45.2,
+        "type_token_ratio": 0.87,
+        "punctuation_density": 0.07
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "verified_human",
+    "verified_human": true,
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
+  },
+  {
+    "event_type": "classification",
+    "content_id": "9d2dc2cf-a561-492d-9ec5-3a4b9a0ae1c0",
+    "creator_id": "video-uncertain",
+    "timestamp": "2026-06-28T14:54:27.946213+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.59,
+    "signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": 0.35,
+      "stylometric_details": {
+        "sentence_count": 3,
+        "word_count": 43,
+        "sentence_length_variance": 29.56,
+        "type_token_ratio": 0.88,
+        "punctuation_density": 0.12
+      },
+      "repetition_score": 0.8,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "transformative",
+          "various sectors",
+          "responsible deployment",
+          "ethical implications",
+          "paradigm shift"
+        ],
+        "repeated_words": []
+      }
+    },
+    "label": "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain.",
+    "status": "under_review",
+    "appeal_filed": true
+  },
+  {
+    "event_type": "appeal",
+    "content_id": "9d2dc2cf-a561-492d-9ec5-3a4b9a0ae1c0",
+    "creator_id": "video-uncertain",
+    "timestamp": "2026-06-28T14:54:27.970331+00:00",
+    "status": "under_review",
+    "appeal_reasoning": "I wrote this myself and the topic is formal, so the writing may sound polished. I want a human reviewer to check the decision.",
+    "original_attribution": "uncertain",
+    "original_confidence": 0.59,
+    "original_signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": 0.35,
+      "stylometric_details": {
+        "sentence_count": 3,
+        "word_count": 43,
+        "sentence_length_variance": 29.56,
+        "type_token_ratio": 0.88,
+        "punctuation_density": 0.12
+      },
+      "repetition_score": 0.8,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "transformative",
+          "various sectors",
+          "responsible deployment",
+          "ethical implications",
+          "paradigm shift"
+        ],
+        "repeated_words": []
+      }
+    }
+  },
+  {
+    "event_type": "provenance_certificate",
+    "content_id": "cff61c74-e40a-4310-9583-abe2e91386ba",
+    "creator_id": "video-human",
+    "timestamp": "2026-06-28T14:54:27.989692+00:00",
+    "status": "verified_human",
+    "verification_statement": "I wrote this myself from a personal restaurant experience and can explain my drafting process.",
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
+  },
+  {
+    "event_type": "metadata_classification",
+    "content_id": "98668319-61e0-43bf-89e5-8509e7d0f83e",
+    "creator_id": "video-metadata-user",
+    "timestamp": "2026-06-28T14:54:27.990692+00:00",
+    "content_type": "metadata",
+    "title": "Moving to a New City",
+    "attribution": "likely_human",
+    "confidence": 0.2,
+    "signals": {
+      "metadata_score": 0.2,
+      "metadata_reasons": [
+        "Longer editing time supports human revision effort.",
+        "Multiple revisions support human writing effort."
+      ],
+      "editing_minutes": 45,
+      "revision_count": 6,
+      "used_ai_tool": false
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "590a5d7b-d731-47f0-b9d6-3297b11dd5e0",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:28.514238+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "3f921e62-160a-4821-b3d6-67a2cbc8bf2f",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:28.844123+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "e6880701-bc61-4d37-9357-a2782f8185bd",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:29.265400+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "d432bbb8-bc18-4672-bca9-07355df62b3a",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:29.636524+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "466aad74-ba5e-4a46-9c69-0887ab3deb89",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:30.095616+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "79005a64-5ddb-4d8c-b4a1-1f9ca657748d",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:30.453295+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "83df21f5-b0e3-4b36-bc3c-12ba4d389e2f",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T14:54:30.811526+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "d160afb5-c0f3-42a1-b354-8f3b916a96ee",
+    "creator_id": "video-strong-ai",
+    "timestamp": "2026-06-28T15:20:18.893887+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.78,
+    "signals": {
+      "llm_score": 0.8,
+      "llm_reasoning": "The text exhibits repetitive and formulaic sentence structures, which is a common trait of AI-generated content.",
+      "stylometric_score": 0.66,
+      "stylometric_details": {
+        "sentence_count": 4,
+        "word_count": 46,
+        "sentence_length_variance": 4.25,
+        "type_token_ratio": 0.54,
+        "punctuation_density": 0.15
+      },
+      "repetition_score": 1.0,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "in conclusion",
+          "overall",
+          "plays a crucial role",
+          "various sectors",
+          "responsible deployment"
+        ],
+        "repeated_words": [
+          "crucial",
+          "artificial",
+          "intelligence"
+        ]
+      }
+    },
+    "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "526b1562-5baf-4043-83aa-fee4bf0ff188",
+    "creator_id": "video-human",
+    "timestamp": "2026-06-28T15:20:19.329169+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.21,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text includes casual language, personal opinions, and a conversational tone, which are characteristic of human writing.",
+      "stylometric_score": 0.29,
+      "stylometric_details": {
+        "sentence_count": 5,
+        "word_count": 55,
+        "sentence_length_variance": 45.2,
+        "type_token_ratio": 0.87,
+        "punctuation_density": 0.07
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "verified_human",
+    "verified_human": true,
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
+  },
+  {
+    "event_type": "classification",
+    "content_id": "bad59505-1bbe-475b-9c2b-5f081429ef5c",
+    "creator_id": "video-uncertain",
+    "timestamp": "2026-06-28T15:20:19.806653+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.59,
+    "signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": 0.35,
+      "stylometric_details": {
+        "sentence_count": 3,
+        "word_count": 43,
+        "sentence_length_variance": 29.56,
+        "type_token_ratio": 0.88,
+        "punctuation_density": 0.12
+      },
+      "repetition_score": 0.8,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "transformative",
+          "various sectors",
+          "responsible deployment",
+          "ethical implications",
+          "paradigm shift"
+        ],
+        "repeated_words": []
+      }
+    },
+    "label": "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain.",
+    "status": "under_review",
+    "appeal_filed": true
+  },
+  {
+    "event_type": "appeal",
+    "content_id": "bad59505-1bbe-475b-9c2b-5f081429ef5c",
+    "creator_id": "video-uncertain",
+    "timestamp": "2026-06-28T15:20:19.835608+00:00",
+    "status": "under_review",
+    "appeal_reasoning": "I wrote this myself and the topic is formal, so the writing may sound polished. I want a human reviewer to check the decision.",
+    "original_attribution": "uncertain",
+    "original_confidence": 0.59,
+    "original_signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": 0.35,
+      "stylometric_details": {
+        "sentence_count": 3,
+        "word_count": 43,
+        "sentence_length_variance": 29.56,
+        "type_token_ratio": 0.88,
+        "punctuation_density": 0.12
+      },
+      "repetition_score": 0.8,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "transformative",
+          "various sectors",
+          "responsible deployment",
+          "ethical implications",
+          "paradigm shift"
+        ],
+        "repeated_words": []
+      }
+    }
+  },
+  {
+    "event_type": "provenance_certificate",
+    "content_id": "526b1562-5baf-4043-83aa-fee4bf0ff188",
+    "creator_id": "video-human",
+    "timestamp": "2026-06-28T15:20:19.860624+00:00",
+    "status": "verified_human",
+    "verification_statement": "I wrote this myself from a personal restaurant experience and can explain my drafting process.",
+    "verified_label": "Verified human-created work: the creator completed an additional verification step for this submission."
+  },
+  {
+    "event_type": "metadata_classification",
+    "content_id": "3b9cc4cf-76f8-466f-8892-95fc6de8a012",
+    "creator_id": "video-metadata-user",
+    "timestamp": "2026-06-28T15:20:19.866498+00:00",
+    "content_type": "metadata",
+    "title": "Moving to a New City",
+    "attribution": "likely_human",
+    "confidence": 0.2,
+    "signals": {
+      "metadata_score": 0.2,
+      "metadata_reasons": [
+        "Longer editing time supports human revision effort.",
+        "Multiple revisions support human writing effort."
+      ],
+      "editing_minutes": 45,
+      "revision_count": 6,
+      "used_ai_tool": false
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "5f9eaffb-d219-4e65-b960-dc58bd5645e8",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:20.254525+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "d33db39f-d41d-4654-9219-41ed6fe6eceb",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:20.675044+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "cff0e262-ba4d-4a17-afce-7f12da87a005",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:21.119518+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "db8f2b5c-c459-4307-b2c4-3adcd0009516",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:21.480454+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "a43c0de0-c2eb-4650-b11a-1eaf96227759",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:21.836917+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "1b3a4ec0-7316-462f-8afc-6c4815d0971b",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:22.324274+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "f0cd6789-c1ad-44b2-9425-a0a2186242f8",
+    "creator_id": "video-ratelimit-test",
+    "timestamp": "2026-06-28T15:20:22.673842+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.28,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text is short and straightforward, lacking the complexity often seen in AI-generated content.",
+      "stylometric_score": 0.5,
+      "stylometric_details": {
+        "reason": "Text is too short for reliable stylometric analysis."
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
   }
 ]
