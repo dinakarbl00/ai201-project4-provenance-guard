@@ -7,8 +7,17 @@ import uuid
 import os
 import re
 from pathlib import Path
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=[],
+    storage_uri="memory://"
+)
 
 load_dotenv()
 
@@ -286,6 +295,7 @@ def find_classification_entry(entries, content_id):
     return None
 
 @app.route("/submit", methods=["POST"])
+@limiter.limit("10 per minute;100 per day")
 def submit():
     data = request.get_json()
 
