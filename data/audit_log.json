@@ -61,5 +61,67 @@
     },
     "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
     "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "422f00d1-2a58-4393-9759-db3d078df3f5",
+    "creator_id": "test-ai-ensemble",
+    "timestamp": "2026-06-28T03:09:47.469652+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.59,
+    "signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": 0.35,
+      "stylometric_details": {
+        "sentence_count": 3,
+        "word_count": 43,
+        "sentence_length_variance": 29.56,
+        "type_token_ratio": 0.88,
+        "punctuation_density": 0.12
+      },
+      "repetition_score": 0.8,
+      "repetition_details": {
+        "generic_phrase_hits": [
+          "it is important to note",
+          "furthermore",
+          "transformative",
+          "various sectors",
+          "responsible deployment",
+          "ethical implications",
+          "paradigm shift"
+        ],
+        "repeated_words": []
+      }
+    },
+    "label": "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "03c92d10-ad64-4083-8ab6-4fa57172580e",
+    "creator_id": "test-human-ensemble",
+    "timestamp": "2026-06-28T03:11:45.995699+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.21,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text includes casual language, personal opinions, and a conversational tone, which are characteristic of human writing.",
+      "stylometric_score": 0.29,
+      "stylometric_details": {
+        "sentence_count": 5,
+        "word_count": 55,
+        "sentence_length_variance": 45.2,
+        "type_token_ratio": 0.87,
+        "punctuation_density": 0.07
+      },
+      "repetition_score": 0.05,
+      "repetition_details": {
+        "generic_phrase_hits": [],
+        "repeated_words": []
+      }
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
   }
 ]
