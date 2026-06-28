@@ -13,5 +13,53 @@
     },
     "label": "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain.",
     "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "ff5e68ce-7fdf-43c9-a972-613c863a6ea5",
+    "creator_id": "test-ai-1",
+    "timestamp": "2026-06-28T02:56:27.756624+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7,
+    "signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": null,
+      "repetition_score": null
+    },
+    "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "c00e2a50-2913-452c-9460-04a0806584a8",
+    "creator_id": "test-ai-1",
+    "timestamp": "2026-06-28T02:56:43.813639+00:00",
+    "attribution": "likely_ai",
+    "confidence": 0.7,
+    "signals": {
+      "llm_score": 0.7,
+      "llm_reasoning": "The text features overly formal language and generic statements, which are common characteristics of AI-generated content.",
+      "stylometric_score": null,
+      "repetition_score": null
+    },
+    "label": "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision.",
+    "status": "classified"
+  },
+  {
+    "event_type": "classification",
+    "content_id": "b19de04a-13d7-4ed3-9654-8fcb5542b191",
+    "creator_id": "test-human-1",
+    "timestamp": "2026-06-28T02:57:48.482902+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.2,
+    "signals": {
+      "llm_score": 0.2,
+      "llm_reasoning": "The text includes casual language, personal opinions, and a conversational tone, which are characteristic of human writing.",
+      "stylometric_score": null,
+      "repetition_score": null
+    },
+    "label": "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review.",
+    "status": "classified"
   }
 ]

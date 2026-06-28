@@ -1,10 +1,22 @@
 from flask import Flask, request, jsonify
 from datetime import datetime, timezone
+from dotenv import load_dotenv
+from groq import Groq
 import json
 import uuid
+import os
 from pathlib import Path
 
 app = Flask(__name__)
+
+load_dotenv()
+
+groq_api_key = os.getenv("GROQ_API_KEY")
+
+if groq_api_key:
+    groq_client = Groq(api_key=groq_api_key)
+else:
+    groq_client = None
 
 LOG_FILE = Path("data/audit_log.json")
 
@@ -41,6 +53,92 @@ def home():
         "endpoints": ["/submit", "/log"]
     })
 
+def extract_json_from_text(text):
+    start = text.find("{")
+    end = text.rfind("}")
+
+    if start == -1 or end == -1:
+        raise ValueError("No JSON object found in model response")
+
+    json_text = text[start:end + 1]
+    return json.loads(json_text)
+
+def get_llm_signal(text):
+    if groq_client is None:
+        return {
+            "llm_score": 0.50,
+            "llm_attribution": "uncertain",
+            "llm_reasoning": "Groq API key was not found, so the LLM signal could not run."
+        }
+
+    prompt = f"""
+        You are helping a writing platform estimate whether a submitted text appears AI-generated or human-written.
+
+        Return only valid JSON with these exact keys:
+        - ai_score: a number from 0.0 to 1.0, where 1.0 means very likely AI-generated and 0.0 means very likely human-written
+        - attribution: one of likely_ai, uncertain, likely_human
+        - reasoning: one short plain-English explanation
+
+        Use uncertainty carefully. Do not overclaim. Formal human writing and non-native English writing should not automatically be treated as AI-generated.
+
+        Text to analyze:
+        {text}
+        """
+
+    try:
+        response = groq_client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a careful AI writing attribution assistant. Return only valid JSON."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0,
+            max_tokens=300
+        )
+
+        model_text = response.choices[0].message.content
+        parsed = extract_json_from_text(model_text)
+
+        score = float(parsed.get("ai_score", 0.50))
+        score = max(0.0, min(1.0, score))
+
+        attribution = parsed.get("attribution", "uncertain")
+
+        if attribution not in ["likely_ai", "uncertain", "likely_human"]:
+            if score >= 0.75:
+                attribution = "likely_ai"
+            elif score <= 0.44:
+                attribution = "likely_human"
+            else:
+                attribution = "uncertain"
+
+        return {
+            "llm_score": round(score, 2),
+            "llm_attribution": attribution,
+            "llm_reasoning": parsed.get("reasoning", "No reasoning provided.")
+        }
+
+    except Exception as error:
+        return {
+            "llm_score": 0.50,
+            "llm_attribution": "uncertain",
+            "llm_reasoning": f"Groq signal failed: {str(error)}"
+        }
+
+def get_label(attribution):
+    if attribution == "likely_ai":
+        return "This writing shows strong signs of being AI-generated. The platform is showing this label so readers have more context, but the creator may appeal this decision."
+
+    if attribution == "likely_human":
+        return "This writing shows stronger signs of being written by a person. No AI-generated label is being applied based on the current review."
+
+    return "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain."
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -60,11 +158,11 @@ def submit():
 
     content_id = str(uuid.uuid4())
 
-    # Placeholder result for now.
-    # We will replace this with real detection signals later.
-    attribution = "uncertain"
-    confidence = 0.50
-    label = "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain."
+    llm_result = get_llm_signal(text)
+
+    attribution = llm_result["llm_attribution"]
+    confidence = llm_result["llm_score"]
+    label = get_label(attribution)
 
     response = {
         "content_id": content_id,
@@ -73,7 +171,8 @@ def submit():
         "confidence": confidence,
         "label": label,
         "signals": {
-            "llm_score": None,
+            "llm_score": llm_result["llm_score"],
+            "llm_reasoning": llm_result["llm_reasoning"],
             "stylometric_score": None,
             "repetition_score": None
         },
