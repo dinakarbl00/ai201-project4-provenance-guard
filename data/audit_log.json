@@ -1,0 +1,17 @@
+[
+  {
+    "event_type": "classification",
+    "content_id": "90de9921-0566-4372-9017-2ce2c2d6a84f",
+    "creator_id": "test-user-1",
+    "timestamp": "2026-06-28T02:46:55.679042+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.5,
+    "signals": {
+      "llm_score": null,
+      "stylometric_score": null,
+      "repetition_score": null
+    },
+    "label": "We are not sure whether this writing was AI-generated or human-written. The available signals are mixed, so readers should treat this label as uncertain.",
+    "status": "classified"
+  }
+]
