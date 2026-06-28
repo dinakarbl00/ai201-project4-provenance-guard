@@ -51,7 +51,7 @@ def add_log_entry(entry):
 def home():
     return jsonify({
         "message": "Provenance Guard API is running",
-        "endpoints": ["/submit", "/log"]
+        "endpoints": ["/submit", "/appeal", "/log"]
     })
 
 def extract_json_from_text(text):
@@ -275,6 +275,16 @@ def combine_scores(llm_score, stylometric_score, repetition_score):
 
     return round(combined_score, 2)
 
+def find_classification_entry(entries, content_id):
+    for entry in entries:
+        if (
+            entry.get("event_type") == "classification"
+            and entry.get("content_id") == content_id
+        ):
+            return entry
+
+    return None
+
 @app.route("/submit", methods=["POST"])
 def submit():
     data = request.get_json()
@@ -339,6 +349,56 @@ def submit():
 
     return jsonify(response)
 
+@app.route("/appeal", methods=["POST"])
+def appeal():
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request body must be JSON"}), 400
+
+    content_id = data.get("content_id", "").strip()
+    creator_reasoning = data.get("creator_reasoning", "").strip()
+
+    if content_id == "":
+        return jsonify({"error": "Missing required field: content_id"}), 400
+
+    if creator_reasoning == "":
+        return jsonify({"error": "Missing required field: creator_reasoning"}), 400
+
+    entries = load_log()
+    original_entry = find_classification_entry(entries, content_id)
+
+    if original_entry is None:
+        return jsonify({"error": "No classified content found for that content_id"}), 404
+
+    original_entry["status"] = "under_review"
+    original_entry["appeal_filed"] = True
+
+    appeal_entry = {
+        "event_type": "appeal",
+        "content_id": content_id,
+        "creator_id": original_entry.get("creator_id"),
+        "timestamp": get_timestamp(),
+        "status": "under_review",
+        "appeal_reasoning": creator_reasoning,
+        "original_attribution": original_entry.get("attribution"),
+        "original_confidence": original_entry.get("confidence"),
+        "original_signals": original_entry.get("signals")
+    }
+
+    entries.append(appeal_entry)
+    save_log(entries)
+
+    return jsonify({
+        "content_id": content_id,
+        "status": "under_review",
+        "message": "Appeal received. This content is now under review.",
+        "appeal": {
+            "creator_reasoning": creator_reasoning,
+            "original_attribution": original_entry.get("attribution"),
+            "original_confidence": original_entry.get("confidence")
+        }
+    })
 
 @app.route("/log", methods=["GET"])
 def get_log():
